@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visite Ariranha do Ivaí</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+       
+        :root {
+            --blush-pink: #ffb6b9;
+            --soft-pink: #fdf2f2;
+            --text-dark: #2c2c2c;
+            --text-muted: #7a7a7a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: var(--text-dark);
+        }
+
+        h1, h2, h3, h4, h5, .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+        }
+
+    
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .navbar-brand img {
+            height: 45px;
+            margin-right: 12px;
+        }
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            margin-left: 15px;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: var(--blush-pink) !important;
+        }
+
+        .carousel-item {
+            height: 70vh;
+            min-height: 400px;
+        }
+        .carousel-item img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            filter: brightness(0.75);
+        }
+        .carousel-caption {
+            bottom: 30%;
+            text-align: left;
+            max-width: 600px;
+        }
+        .carousel-caption h1 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: -1px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .btn-elegant {
+            background-color: var(--blush-pink);
+            color: white;
+            border-radius: 30px;
+            padding: 10px 28px;
+            font-weight: 500;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .btn-elegant:hover {
+            background-color: #fa9c9f;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 182, 185, 0.4);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        .card {
+            border: none;
+            border-radius: 0;
+            background-color: var(--soft-pink);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .card-img-top {
+            border-radius: 0;
+            height: 250px;
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 2rem 1.5rem;
+        }
+        .card-title {
+            font-weight: 600;
+        }
+
+        .info-section {
+            background-color: #fafafa;
+            padding: 5rem 0;
+        }
+        .info-title {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .info-title span {
+            color: var(--blush-pink);
+        }
+        .custom-listgroup .list-group-item {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid #eaeaea;
+            padding: 1.5rem 0;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+        .custom-listgroup .list-group-item:last-child {
+            border-bottom: none;
+        }
+        .step-number {
+            color: var(--blush-pink);
+            font-weight: 400;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+      
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="image_fdcabf.png" alt="Brasão Ariranha do Ivaí">
+                <span>Ariranha do Ivaí</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#destinos">Destinos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#dicas">Roteiro</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home">
+        <div id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="image.png" class="d-block w-100" alt="Salto do Ariranha">
+                    <div class="carousel-caption">
+                        <h1>Descubra a<br>Natureza</h1>
+                        <p class="lead mb-4">Sinta a energia das nossas quedas d'água e reconecte-se com o meio ambiente.</p>
+                        <button class="btn btn-elegant">Planejar Visita</button>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="cidade.png" class="d-block w-100" alt="Vista Aérea da Cidade">
+                    <div class="carousel-caption">
+                        <h1>Tranquilidade<br>e Paz</h1>
+                        <p class="lead mb-4">Uma cidade acolhedora esperando por você no coração do Paraná.</p>
+                        <button class="btn btn-elegant">Conhecer a Cidade</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="container py-5 mt-5" id="destinos">
+        <h2 class="section-title">Pontos Turísticos</h2>
+        <div class="row g-5">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="letreiro.png" class="card-img-top" alt="Letreiro da Cidade">
+                    <div class="card-body">
+                        <h5 class="card-title">Letreiro Oficial</h5>
+                        <p class="card-text text-muted">A parada obrigatória para registrar seu amor pela nossa cidade em um ambiente familiar e agradável.</p>
+                        <button class="btn btn-elegant btn-sm mt-2">Ver Rota</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="salto.jpg" class="card-img-top" alt="Salto do Ariranha">
+                    <div class="card-body">
+                        <h5 class="card-title">Salto do Ariranha</h5>
+                        <p class="card-text text-muted">Uma impressionante maravilha natural com águas cristalinas, perfeita para fotos e contemplação.</p>
+                        <button class="btn btn-elegant btn-sm mt-2">Explorar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="cristo.png" class="card-img-top" alt="Cristo Redentor">
+                    <div class="card-body">
+                        <h5 class="card-title">Cristo Redentor</h5>
+                        <p class="card-text text-muted">Um mirante deslumbrante que oferece uma vista panorâmica de toda a região cercada por muito verde.</p>
+                        <button class="btn btn-elegant btn-sm mt-2">Visitar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section mt-5" id="dicas">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <h2 class="info-title fs-1 mb-4">Como <span>Aproveitar</span></h2>
+                    <p class="text-muted mb-4">Preparamos um guia rápido para que sua experiência em Ariranha do Ivaí seja relaxante, inesquecível e conectada com a nossa essência.</p>
+                    <img src="image_fdcac4.jpg" alt="Ponto Turístico" class="img-fluid rounded" style="box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                </div>
+                <div class="col-lg-6 offset-lg-1">
+                    <ul class="list-group list-group-flush custom-listgroup">
+                        <li class="list-group-item">
+                            <span class="step-number">01</span>
+                            <strong class="text-dark d-block mb-1">PREPARE SUA CÂMERA</strong>
+                            Comece o dia no Letreiro Oficial. A luz da manhã rende as melhores fotos em família.
+                        </li>
+                        <li class="list-group-item">
+                            <span class="step-number">02</span>
+                            <strong class="text-dark d-block mb-1">CONECTE-SE COM A NATUREZA</strong>
+                            Visite o Salto do Ariranha. Recomendamos roupas leves, calçados confortáveis e repelente para aproveitar a trilha.
+                        </li>
+                        <li class="list-group-item">
+                            <span class="step-number">03</span>
+                            <strong class="text-dark d-block mb-1">APRECIE A VISTA</strong>
+                            Finalize a tarde subindo até o monumento do Cristo. O pôr do sol visto de lá é uma das experiências mais belas da região.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-0">&copy; 2024 Turismo Ariranha do Ivaí. Design minimalista e elegante.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
