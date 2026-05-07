@@ -4,164 +4,543 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visite Ariranha do Ivaí</title>
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!--
+        FONTES ATUALIZADAS:
+        - "Playfair Display": serifada clássica, elegante e com peso bom para títulos
+        - "Jost": sem serifa moderna, geométrica, muito legível em peso normal/médio
+        Substituem as fontes antigas (Cormorant Garamond era fina demais; DM Sans era genérica)
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
-       
+
+        /* =========================================
+           VARIÁVEIS GLOBAIS DE COR
+           Define as cores reutilizadas em todo o site.
+           Mudar um valor aqui propaga para todo o CSS.
+        ========================================= */
         :root {
-            --blush-pink: #ffb6b9;
-            --soft-pink: #fdf2f2;
-            --text-dark: #2c2c2c;
-            --text-muted: #7a7a7a;
+            --blush-pink: #d4826e;        /* Terracota suave – botões, destaques */
+            --blush-dark: #b86a57;        /* Terracota escuro – hover dos botões */
+            --soft-pink: #fdf2f0;         /* Rosa muito claro – fundo de cards */
+            --cream: #faf8f5;             /* Creme – fundo de seções alternadas */
+            --text-dark: #1a1714;         /* Quase preto – textos principais */
+            --text-muted: #6b6560;        /* Cinza médio – textos secundários */
+            --line: rgba(0,0,0,0.09);     /* Linha divisória sutil */
+            --gold: #c9a96e;              /* Dourado – detalhes decorativos */
         }
 
+        /* =========================================
+           RESET E ESTILO BASE
+           Zera margens/paddings e define caixa CSS.
+        ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Fonte padrão do corpo: Jost peso 400, boa legibilidade */
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Jost', sans-serif;
             background-color: #ffffff;
             color: var(--text-dark);
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased; /* Suaviza as bordas das letras */
         }
 
-        h1, h2, h3, h4, h5, .navbar-brand {
-            font-family: 'Poppins', sans-serif;
+        /* Títulos usam Playfair Display: serifada com peso generoso */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
         }
 
-    
+        /* =========================================
+           NAVBAR
+           Fundo branco levemente opaco com efeito
+           de desfoque (glassmorphism).
+        ========================================= */
         .navbar {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(14px);          /* Desfoque atrás da navbar */
+            border-bottom: 1px solid var(--line);
+            padding: 1rem 0;
         }
-        .navbar-brand img {
-            height: 45px;
-            margin-right: 12px;
-        }
-        .nav-link {
+
+        /* Nome da cidade: fonte serifada, peso 600 para ser bem visível */
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
             color: var(--text-dark) !important;
-            font-weight: 500;
-            margin-left: 15px;
+        }
+
+        /* Brasão ao lado do nome na navbar */
+        .navbar-brand img {
+            height: 36px;
+            margin-right: 10px;
+        }
+
+        /* Links do menu: sans-serif, maiúsculas, bem espaçados */
+        .nav-link {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;                    /* Peso 500 = semibold leve, legível */
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-dark) !important;
+            margin-left: 2.2rem;
             transition: color 0.3s;
         }
+
         .nav-link:hover {
             color: var(--blush-pink) !important;
         }
 
+        /* =========================================
+           HERO / CARROSSEL PRINCIPAL
+           Ocupa 100% da altura da janela.
+        ========================================= */
         .carousel-item {
-            height: 70vh;
-            min-height: 400px;
+            height: 100vh;
+            min-height: 520px;
         }
+
         .carousel-item img {
             height: 100%;
             width: 100%;
             object-fit: cover;
-            filter: brightness(0.75);
+            filter: brightness(0.55);            /* Escurece para o texto se destacar */
         }
+
+        /* Texto flutuante sobre a foto do carrossel */
         .carousel-caption {
-            bottom: 30%;
+            bottom: auto;
+            top: 50%;
+            transform: translateY(-50%);          /* Centralização vertical */
             text-align: left;
+            left: 8%;
+            right: auto;
             max-width: 600px;
         }
-        .carousel-caption h1 {
-            font-size: 3.5rem;
-            font-weight: 600;
-            letter-spacing: -1px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-        }
 
-        .btn-elegant {
-            background-color: var(--blush-pink);
-            color: white;
-            border-radius: 30px;
-            padding: 10px 28px;
+        /* Pequeno rótulo acima do título: "Natureza · Paraná" */
+        .carousel-caption .label {
+            font-size: 0.75rem;
             font-weight: 500;
-            border: none;
-            transition: all 0.3s ease;
-        }
-        .btn-elegant:hover {
-            background-color: #fa9c9f;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 182, 185, 0.4);
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold);                  /* Dourado para chamar atenção */
+            margin-bottom: 1.2rem;
+            display: block;
         }
 
-        .section-title {
-            font-size: 2.2rem;
-            margin-bottom: 3rem;
+        /* Título principal do hero: grande, serifado, impactante */
+        .carousel-caption h1 {
+            font-size: clamp(3.2rem, 7vw, 6.5rem); /* Tamanho fluido/responsivo */
+            font-weight: 700;                       /* Peso forte = muito legível */
+            line-height: 1.05;
+            letter-spacing: -0.01em;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Itálico do Playfair Display é muito elegante */
+        .carousel-caption h1 em {
+            font-style: italic;
+            color: var(--gold);                  /* Dourado no itálico */
+        }
+
+        /* Parágrafo do hero: branco semitransparente */
+        .carousel-caption p {
+            color: rgba(255,255,255,0.82);
+            font-size: 1.05rem;
+            font-weight: 400;
+            line-height: 1.75;
+            margin-bottom: 2.5rem;
+            max-width: 420px;
+        }
+
+        /* =========================================
+           BOTÃO PADRÃO (dentro do hero, fundo escuro)
+        ========================================= */
+        .btn-elegant {
+            background-color: transparent;
+            color: white;
+            border: 1.5px solid rgba(255,255,255,0.55);
+            border-radius: 2px;
+            padding: 13px 34px;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;                    /* Peso 600 = mais legível em botão */
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            transition: all 0.35s ease;
+        }
+
+        .btn-elegant:hover {
+            background-color: var(--blush-pink);
+            border-color: var(--blush-pink);
+            color: white;
+        }
+
+        /* Botão versão escura (fora do hero) */
+        .btn-elegant-dark {
+            background-color: transparent;
+            color: var(--text-dark);
+            border: 1.5px solid rgba(0,0,0,0.3);
+            border-radius: 2px;
+            padding: 11px 28px;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            transition: all 0.35s ease;
+        }
+
+        .btn-elegant-dark:hover {
+            background-color: var(--blush-pink);
+            border-color: var(--blush-pink);
+            color: white;
+        }
+
+        /* Pontos indicadores do carrossel */
+        .carousel-indicators button {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.45);
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-indicators .active {
+            background-color: var(--gold);
+        }
+
+        /* =========================================
+           FAIXA INTRODUTÓRIA
+           Texto centralizado entre o hero e os cards.
+        ========================================= */
+        .intro-strip {
+            padding: 5.5rem 0 1.5rem;
             text-align: center;
         }
-        .card {
-            border: none;
-            border-radius: 0;
-            background-color: var(--soft-pink);
-            transition: transform 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-10px);
-        }
-        .card-img-top {
-            border-radius: 0;
-            height: 250px;
-            object-fit: cover;
-        }
-        .card-body {
-            padding: 2rem 1.5rem;
-        }
-        .card-title {
+
+        /* Eyebrow = pequeno texto acima do título principal */
+        .intro-strip .eyebrow {
+            font-size: 0.73rem;
             font-weight: 600;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: var(--blush-pink);
+            margin-bottom: 1rem;
+            display: block;
         }
 
-        .info-section {
-            background-color: #fafafa;
-            padding: 5rem 0;
-        }
-        .info-title {
-            font-weight: 600;
+        .intro-strip h2 {
+            font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+            font-weight: 600;                    /* Peso 600: sólido sem ser pesado */
+            line-height: 1.15;
+            letter-spacing: -0.01em;
             color: var(--text-dark);
         }
-        .info-title span {
-            color: var(--blush-pink);
-        }
-        .custom-listgroup .list-group-item {
-            background-color: transparent;
-            border: none;
-            border-bottom: 1px solid #eaeaea;
-            padding: 1.5rem 0;
-            font-size: 1.1rem;
-            color: var(--text-muted);
-        }
-        .custom-listgroup .list-group-item:last-child {
-            border-bottom: none;
-        }
-        .step-number {
-            color: var(--blush-pink);
-            font-weight: 400;
-            font-size: 1.2rem;
-            display: block;
-            margin-bottom: 5px;
-            font-family: 'Poppins', sans-serif;
+
+        .intro-strip h2 em {
+            font-style: italic;
+            color: var(--blush-pink);            /* Destaque em cor no itálico */
         }
 
-      
+        /* Linha decorativa abaixo do título */
+        .intro-strip .divider {
+            width: 44px;
+            height: 2px;
+            background: linear-gradient(to right, var(--blush-pink), var(--gold));
+            margin: 2rem auto;
+            border-radius: 1px;
+        }
+
+        /* =========================================
+           GRID DE PONTOS TURÍSTICOS
+        ========================================= */
+        #destinos {
+            padding-bottom: 6rem;
+        }
+
+        /* 3 colunas; o 1º card vai cobrir 2 delas */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 3px;                             /* Espaço mínimo entre cards */
+        }
+
+        /* Card individual: relative para posicionar overlay por cima */
+        .card-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        /* Primeiro card: ocupa colunas 1 e 2 */
+        .card-item:first-child {
+            grid-column: span 2;
+        }
+
+        .card-item img {
+            width: 100%;
+            height: 430px;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.72);
+            transition: transform 0.8s ease, filter 0.5s ease;
+        }
+
+        /* Hover: imagem dá um leve zoom e escurece mais */
+        .card-item:hover img {
+            transform: scale(1.05);
+            filter: brightness(0.5);
+        }
+
+        /* Gradiente escuro na base do card para o texto se destacar */
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2.5rem 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
+            color: white;
+        }
+
+        /* Etiqueta de categoria no card: "Natureza", "Mirante" */
+        .card-overlay .tag {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Nome do ponto turístico: serifado, peso 600 */
+        .card-overlay h5 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            line-height: 1.2;
+        }
+
+        /* Descrição curta sob o nome */
+        .card-overlay p {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.72);
+            margin: 0;
+            max-width: 300px;
+        }
+
+        /* =========================================
+           SEÇÃO DE ROTEIRO ("COMO APROVEITAR")
+        ========================================= */
+        .info-section {
+            background-color: var(--cream);
+            padding: 7.5rem 0;
+        }
+
+        .info-section .eyebrow {
+            font-size: 0.73rem;
+            font-weight: 600;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: var(--blush-pink);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* Título da seção: forte, legível */
+        .info-section h2 {
+            font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .info-section h2 em {
+            font-style: italic;
+            color: var(--blush-pink);
+        }
+
+        /* Parágrafo introdutório: cinza médio, fácil de ler */
+        .info-section .lead-text {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.85;
+            max-width: 390px;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Imagem lateral da seção */
+        .info-section .side-img {
+            width: 100%;
+            height: 490px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Lista de passos do roteiro */
+        .steps-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        /* Cada passo: número + conteúdo lado a lado */
+        .steps-list li {
+            display: flex;
+            gap: 2rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--line);
+            align-items: flex-start;
+        }
+
+        .steps-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Número decorativo: "01", "02", "03" */
+        .step-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--gold);                  /* Dourado para contraste elegante */
+            line-height: 1;
+            min-width: 48px;
+            padding-top: 2px;
+        }
+
+        /* Título do passo: sans-serif, uppercase, bem visível */
+        .step-content strong {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.6rem;
+            color: var(--text-dark);
+        }
+
+        /* Descrição do passo */
+        .step-content p {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            line-height: 1.75;
+            margin: 0;
+        }
+
+        /* =========================================
+           RODAPÉ
+        ========================================= */
         footer {
             background-color: var(--text-dark);
-            color: white;
-            padding: 2rem 0;
-            font-size: 0.9rem;
+            color: rgba(255,255,255,0.45);
+            padding: 2.5rem 0;
         }
+
+        /* Layout: nome à esquerda, copyright à direita */
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.78rem;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+        }
+
+        /* Nome da cidade no rodapé: destaque leve */
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.75);
+        }
+
+        /* =========================================
+           ANIMAÇÃO DE SCROLL (FADE UP)
+           Elementos ficam invisíveis antes de
+           entrar na viewport.
+        ========================================= */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.85s ease, transform 0.85s ease;
+        }
+
+        /* Quando o IntersectionObserver detecta visibilidade */
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Atrasos escalonados para animação em cascata */
+        .fade-up:nth-child(2) { transition-delay: 0.12s; }
+        .fade-up:nth-child(3) { transition-delay: 0.24s; }
+
+        /* =========================================
+           RESPONSIVIDADE (mobile)
+        ========================================= */
+        @media (max-width: 768px) {
+            /* Cards empilham em coluna única no mobile */
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .card-item:first-child {
+                grid-column: span 1;
+            }
+            /* Hero um pouco menor no mobile */
+            .carousel-item {
+                height: 88vh;
+            }
+            /* Rodapé centralizado no mobile */
+            .footer-inner {
+                flex-direction: column;
+                gap: 0.8rem;
+                text-align: center;
+            }
+        }
+
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+    <!-- =============================================
+         NAVBAR
+         Barra de navegação fixada no topo da página.
+    ============================================= -->
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
+
+            <!-- Brasão + Nome da cidade -->
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="image_fdcabf.png" alt="Brasão Ariranha do Ivaí">
-                <span>Ariranha do Ivaí</span>
+                <img src="brasao.png" alt="Brasão Ariranha do Ivaí">
+                Ariranha do Ivaí
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+            <!-- Botão hambúrguer: aparece apenas em telas pequenas -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- Links de navegação -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#home">Início</a></li>
@@ -172,106 +551,199 @@
         </div>
     </nav>
 
+
+    <!-- =============================================
+         HERO – carrossel de entrada
+    ============================================= -->
     <header id="home">
-        <div id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5500">
+
+            <!-- Pontos indicadores do carrossel -->
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
                 <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
             </div>
+
             <div class="carousel-inner">
+
+                <!-- Slide 1: Natureza -->
                 <div class="carousel-item active">
                     <img src="image.png" class="d-block w-100" alt="Salto do Ariranha">
                     <div class="carousel-caption">
-                        <h1>Descubra a<br>Natureza</h1>
-                        <p class="lead mb-4">Sinta a energia das nossas quedas d'água e reconecte-se com o meio ambiente.</p>
+                        <span class="label">Natureza · Paraná</span>
+                        <h1>Descubra a<br><em>Natureza</em></h1>
+                        <p>Sinta a energia das nossas quedas d'água e reconecte-se com o meio ambiente.</p>
                         <button class="btn btn-elegant">Planejar Visita</button>
                     </div>
                 </div>
+
+                <!-- Slide 2: Cidade -->
                 <div class="carousel-item">
                     <img src="cidade.png" class="d-block w-100" alt="Vista Aérea da Cidade">
                     <div class="carousel-caption">
-                        <h1>Tranquilidade<br>e Paz</h1>
-                        <p class="lead mb-4">Uma cidade acolhedora esperando por você no coração do Paraná.</p>
+                        <span class="label">Cidade · Interior</span>
+                        <h1>Tranquilidade<br><em>e Paz</em></h1>
+                        <p>Uma cidade acolhedora esperando por você no coração do Paraná.</p>
                         <button class="btn btn-elegant">Conhecer a Cidade</button>
                     </div>
                 </div>
+
             </div>
         </div>
     </header>
 
-    <section class="container py-5 mt-5" id="destinos">
-        <h2 class="section-title">Pontos Turísticos</h2>
-        <div class="row g-5">
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="letreiro.png" class="card-img-top" alt="Letreiro da Cidade">
-                    <div class="card-body">
-                        <h5 class="card-title">Letreiro Oficial</h5>
-                        <p class="card-text text-muted">A parada obrigatória para registrar seu amor pela nossa cidade em um ambiente familiar e agradável.</p>
-                        <button class="btn btn-elegant btn-sm mt-2">Ver Rota</button>
-                    </div>
+
+    <!-- =============================================
+         FAIXA INTRODUTÓRIA
+    ============================================= -->
+    <div class="intro-strip container">
+        <span class="eyebrow">O que visitar</span>
+        <h2>Pontos <em>Turísticos</em></h2>
+        <div class="divider"></div>
+    </div>
+
+
+    <!-- =============================================
+         DESTINOS – grade de pontos turísticos
+    ============================================= -->
+    <section id="destinos" class="container">
+        <div class="cards-grid">
+
+            <!-- Card 1: Letreiro (span 2 = ocupa 2 colunas) -->
+            <div class="card-item fade-up">
+                <img src="letreiro.png" alt="Letreiro da Cidade">
+                <div class="card-overlay">
+                    <span class="tag">Marco Urbano</span>
+                    <h5>Letreiro Oficial</h5>
+                    <p>A parada obrigatória para registrar seu amor pela cidade.</p>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="salto.jpg" class="card-img-top" alt="Salto do Ariranha">
-                    <div class="card-body">
-                        <h5 class="card-title">Salto do Ariranha</h5>
-                        <p class="card-text text-muted">Uma impressionante maravilha natural com águas cristalinas, perfeita para fotos e contemplação.</p>
-                        <button class="btn btn-elegant btn-sm mt-2">Explorar</button>
-                    </div>
+
+            <!-- Card 2: Salto do Ariranha -->
+            <div class="card-item fade-up">
+                <img src="salto.jpg" alt="Salto do Ariranha">
+                <div class="card-overlay">
+                    <span class="tag">Natureza</span>
+                    <h5>Salto do Ariranha</h5>
+                    <p>Águas cristalinas e trilha cercada de verde.</p>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="cristo.png" class="card-img-top" alt="Cristo Redentor">
-                    <div class="card-body">
-                        <h5 class="card-title">Cristo Redentor</h5>
-                        <p class="card-text text-muted">Um mirante deslumbrante que oferece uma vista panorâmica de toda a região cercada por muito verde.</p>
-                        <button class="btn btn-elegant btn-sm mt-2">Visitar</button>
-                    </div>
+
+            <!-- Card 3: Cristo Redentor -->
+            <div class="card-item fade-up">
+                <img src="cristo.png" alt="Cristo Redentor">
+                <div class="card-overlay">
+                    <span class="tag">Mirante</span>
+                    <h5>Cristo Redentor</h5>
+                    <p>Vista panorâmica de toda a região ao pôr do sol.</p>
                 </div>
             </div>
+
+            <!-- Card 4: Pôr do Sol -->
+            <div class="card-item fade-up">
+                <img src="sol.png" alt="Pôr do Sol">
+                <div class="card-overlay">
+                    <span class="tag">Contemplação</span>
+                    <h5>Pôr do Sol</h5>
+                    <p>Um espetáculo diário que não tem preço.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <section class="info-section mt-5" id="dicas">
+
+    <!-- =============================================
+         ROTEIRO – "Como Aproveitar"
+    ============================================= -->
+    <section class="info-section" id="dicas">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-5 mb-4 mb-lg-0">
-                    <h2 class="info-title fs-1 mb-4">Como <span>Aproveitar</span></h2>
-                    <p class="text-muted mb-4">Preparamos um guia rápido para que sua experiência em Ariranha do Ivaí seja relaxante, inesquecível e conectada com a nossa essência.</p>
-                    <img src="sol.png" alt="Ponto Turístico" class="img-fluid rounded" style="box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <div class="row align-items-center g-5">
+
+                <!-- Coluna esquerda: foto lateral -->
+                <div class="col-lg-5 fade-up">
+                    <img src="sol.png" alt="Ponto Turístico" class="side-img">
                 </div>
-                <div class="col-lg-6 offset-lg-1">
-                    <ul class="list-group list-group-flush custom-listgroup">
-                        <li class="list-group-item">
-                            <span class="step-number">01</span>
-                            <strong class="text-dark d-block mb-1">PREPARE SUA CÂMERA</strong>
-                            Comece o dia no Letreiro Oficial. A luz da manhã rende as melhores fotos em família.
+
+                <!-- Coluna direita: texto + passos -->
+                <div class="col-lg-6 offset-lg-1 fade-up">
+                    <span class="eyebrow">Guia rápido</span>
+                    <h2>Como <em>Aproveitar</em></h2>
+                    <p class="lead-text">
+                        Preparamos um roteiro para que sua experiência em Ariranha do Ivaí seja relaxante, inesquecível e conectada com a nossa essência.
+                    </p>
+
+                    <ul class="steps-list">
+
+                        <li>
+                            <span class="step-num">01</span>
+                            <div class="step-content">
+                                <strong>Prepare sua câmera</strong>
+                                <p>Comece o dia no Letreiro Oficial. A luz da manhã rende as melhores fotos em família.</p>
+                            </div>
                         </li>
-                        <li class="list-group-item">
-                            <span class="step-number">02</span>
-                            <strong class="text-dark d-block mb-1">CONECTE-SE COM A NATUREZA</strong>
-                            Visite o Salto do Ariranha. Recomendamos roupas leves, calçados confortáveis e repelente para aproveitar a trilha.
+
+                        <li>
+                            <span class="step-num">02</span>
+                            <div class="step-content">
+                                <strong>Conecte-se com a natureza</strong>
+                                <p>Visite o Salto do Ariranha. Recomendamos roupas leves, calçados confortáveis e repelente.</p>
+                            </div>
                         </li>
-                        <li class="list-group-item">
-                            <span class="step-number">03</span>
-                            <strong class="text-dark d-block mb-1">APRECIE A VISTA</strong>
-                            Finalize a tarde subindo até o monumento do Cristo. O pôr do sol visto de lá é uma das experiências mais belas da região.
+
+                        <li>
+                            <span class="step-num">03</span>
+                            <div class="step-content">
+                                <strong>Aprecie a vista</strong>
+                                <p>Finalize a tarde subindo até o Cristo. O pôr do sol visto de lá é uma das experiências mais belas da região.</p>
+                            </div>
                         </li>
+
                     </ul>
+
+                    <button class="btn btn-elegant-dark mt-4">Ver roteiro completo</button>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <footer class="text-center">
+
+    <!-- =============================================
+         RODAPÉ
+    ============================================= -->
+    <footer>
         <div class="container">
-            <p class="mb-0">&copy; 2024 Turismo Ariranha do Ivaí. Design minimalista e elegante.</p>
+            <div class="footer-inner">
+                <span class="footer-brand">Ariranha do Ivaí</span>
+                <span>&copy; 2024 Turismo Ariranha do Ivaí — Paraná, Brasil</span>
+            </div>
         </div>
     </footer>
 
+
+    <!-- Bootstrap JS: necessário para o carrossel funcionar -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        /*
+         * INTERSECTION OBSERVER – animação de scroll
+         *
+         * Observa todos os elementos com classe "fade-up".
+         * Quando 15% de um elemento entra na viewport,
+         * adiciona a classe "visible", que ativa o CSS
+         * de transição e faz o elemento aparecer suavemente.
+         */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+
 </body>
 </html>
