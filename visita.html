@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planejar Visita — Ariranha do Ivaí</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --blush-pink: #d4826e;
+            --blush-dark: #b86a57;
+            --cream: #faf8f5;
+            --text-dark: #1a1714;
+            --text-muted: #6b6560;
+            --line: rgba(0,0,0,0.09);
+            --gold: #c9a96e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: #fff;
+            color: var(--text-dark);
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5 { font-family: 'Playfair Display', serif; }
+
+        /* ── NAVBAR ─────────────────────────────── */
+        .navbar {
+            background-color: rgba(255,255,255,0.97);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
+            padding: 1rem 0;
+        }
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            color: var(--text-dark) !important;
+        }
+        .navbar-brand img { height: 36px; margin-right: 10px; }
+        .nav-link {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-dark) !important;
+            margin-left: 2.2rem;
+            transition: color 0.3s;
+        }
+        .nav-link:hover { color: var(--blush-pink) !important; }
+
+        /* ── HERO ───────────────────────────────── */
+        .page-hero {
+            background-color: var(--cream);
+            padding: 10rem 0 5rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--line);
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 380px; height: 380px;
+            border-radius: 50%;
+            border: 1px solid rgba(201,169,110,0.2);
+        }
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 20px; left: -80px;
+            width: 280px; height: 280px;
+            border-radius: 50%;
+            border: 1px solid rgba(212,130,110,0.12);
+        }
+        .page-hero .eyebrow {
+            font-size: 0.73rem;
+            font-weight: 600;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--blush-pink);
+            display: block;
+            margin-bottom: 1.2rem;
+        }
+        .page-hero h1 {
+            font-size: clamp(2.8rem, 5vw, 5rem);
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+        }
+        .page-hero h1 em {
+            font-style: italic;
+            color: var(--blush-pink);
+        }
+        .page-hero p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.8;
+            max-width: 460px;
+        }
+
+        /* ── LAYOUT PRINCIPAL ───────────────────── */
+        .main-section {
+            padding: 6rem 0 8rem;
+        }
+
+        /* ── FORMULÁRIO ─────────────────────────── */
+        .form-block {
+            background-color: #fff;
+            border: 1px solid var(--line);
+            padding: 3rem;
+        }
+
+        .form-block h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+        .form-block h3 em { font-style: italic; color: var(--blush-pink); }
+
+        .form-block .sub {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        /* Labels dos campos */
+        .form-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Campos de input */
+        .form-control, .form-select {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 400;
+            color: var(--text-dark);
+            background-color: var(--cream);
+            border: 1px solid var(--line);
+            border-radius: 2px;
+            padding: 0.75rem 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201,169,110,0.12);
+            background-color: #fff;
+            outline: none;
+        }
+        .form-control::placeholder { color: rgba(107,101,96,0.5); }
+
+        /* Checkboxes de atrações */
+        .check-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+        }
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--line);
+            border-radius: 2px;
+            cursor: pointer;
+            transition: border-color 0.25s, background-color 0.25s;
+            background-color: var(--cream);
+        }
+        .check-item:hover {
+            border-color: var(--gold);
+            background-color: #fff;
+        }
+        .check-item input[type="checkbox"] {
+            accent-color: var(--blush-pink);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        .check-item.selected {
+            border-color: var(--blush-pink);
+            background-color: rgba(212,130,110,0.05);
+        }
+        .check-label {
+            font-size: 0.88rem;
+            font-weight: 400;
+            color: var(--text-dark);
+            cursor: pointer;
+            line-height: 1.3;
+        }
+        .check-label small {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Divisor entre seções do form */
+        .form-divider {
+            border: none;
+            border-top: 1px solid var(--line);
+            margin: 2.2rem 0;
+        }
+
+        /* Botão enviar */
+        .btn-submit {
+            background-color: var(--blush-pink);
+            color: #fff;
+            border: none;
+            border-radius: 2px;
+            padding: 14px 40px;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn-submit:hover { background-color: var(--blush-dark); }
+
+        /* Estado de sucesso após envio */
+        .success-msg {
+            display: none;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        .success-msg .check-circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: rgba(212,130,110,0.1);
+            border: 1.5px solid var(--blush-pink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.6rem;
+        }
+        .success-msg h4 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+        }
+        .success-msg p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.75;
+            max-width: 340px;
+            margin: 0 auto 2rem;
+        }
+
+        /* ── SIDEBAR DIREITA ────────────────────── */
+        .sidebar { padding-left: 3rem; }
+
+        /* Card de informação lateral */
+        .info-card {
+            border: 1px solid var(--line);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            background-color: #fff;
+        }
+        .info-card h5 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: var(--text-dark);
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--line);
+        }
+        .info-card h5 em { font-style: italic; color: var(--gold); }
+
+        /* Lista de itens informativos */
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .info-list li {
+            display: flex;
+            gap: 0.8rem;
+            align-items: flex-start;
+            padding: 0.65rem 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 0.88rem;
+        }
+        .info-list li:last-child { border-bottom: none; }
+        .info-list .i-label {
+            font-weight: 600;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            min-width: 70px;
+            padding-top: 1px;
+        }
+        .info-list .i-val {
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        /* Card destaque dourado */
+        .highlight-card {
+            background-color: var(--text-dark);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .highlight-card::before {
+            content: '';
+            position: absolute;
+            bottom: -40px; right: -40px;
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            border: 1px solid rgba(201,169,110,0.2);
+        }
+        .highlight-card .tag {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+        .highlight-card h5 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.6rem;
+        }
+        .highlight-card p {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.7;
+            margin-bottom: 1.3rem;
+        }
+        .btn-link-gold {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,169,110,0.4);
+            padding-bottom: 2px;
+            transition: color 0.3s;
+        }
+        .btn-link-gold:hover { color: #fff; }
+
+        /* ── ANIMAÇÕES ──────────────────────────── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.85s ease, transform 0.85s ease;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── RODAPÉ ─────────────────────────────── */
+        footer {
+            background-color: var(--text-dark);
+            color: rgba(255,255,255,0.45);
+            padding: 2.5rem 0;
+        }
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.78rem;
+            letter-spacing: 0.06em;
+        }
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.75);
+        }
+
+        /* ── RESPONSIVO ─────────────────────────── */
+        @media (max-width: 991px) {
+            .sidebar { padding-left: 0; margin-top: 3rem; }
+        }
+        @media (max-width: 768px) {
+            .form-block { padding: 2rem 1.5rem; }
+            .check-grid { grid-template-columns: 1fr; }
+            .footer-inner { flex-direction: column; gap: 0.8rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="brasao.png" alt="Brasão Ariranha do Ivaí">
+                Ariranha do Ivaí
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html#home">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#destinos">Destinos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="roteiro.html">Roteiro</a></li>
+                    <li class="nav-item"><a class="nav-link" href="visita.html" style="color: var(--blush-pink) !important;">Planejar</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="page-hero">
+        <div class="container">
+            <span class="eyebrow">Vamos planejar juntos</span>
+            <h1>Planeie a sua<br><em>Visita</em></h1>
+            <p>Preencha o formulário abaixo e nossa equipe de turismo entra em contato com dicas personalizadas, informações de hospedagem e o melhor roteiro para o seu perfil.</p>
+        </div>
+    </section>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <section class="main-section">
+        <div class="container">
+            <div class="row">
+
+                <!-- COLUNA DO FORMULÁRIO -->
+                <div class="col-lg-7 fade-up">
+                    <div class="form-block">
+
+                        <h3>Conte-nos sobre <em>sua viagem</em></h3>
+                        <p class="sub">Quanto mais detalhes você compartilhar, melhor poderemos ajudar a criar uma experiência inesquecível.</p>
+
+                        <!-- Formulário principal -->
+                        <form id="visitForm" novalidate>
+
+                            <!-- Nome + Email -->
+                            <div class="row g-3 mb-3">
+                                <div class="col-sm-6">
+                                    <label class="form-label">Nome completo</label>
+                                    <input type="text" class="form-control" placeholder="Seu nome" required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label">E-mail</label>
+                                    <input type="email" class="form-control" placeholder="seu@email.com" required>
+                                </div>
+                            </div>
+
+                            <!-- Telefone + Cidade de origem -->
+                            <div class="row g-3 mb-3">
+                                <div class="col-sm-6">
+                                    <label class="form-label">WhatsApp / Telefone</label>
+                                    <input type="tel" class="form-control" placeholder="(00) 00000-0000">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label">Cidade de origem</label>
+                                    <input type="text" class="form-control" placeholder="De onde você vem?">
+                                </div>
+                            </div>
+
+                            <!-- Data + Quantidade -->
+                            <div class="row g-3 mb-3">
+                                <div class="col-sm-6">
+                                    <label class="form-label">Data prevista da visita</label>
+                                    <input type="date" class="form-control">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label">Número de visitantes</label>
+                                    <select class="form-select">
+                                        <option value="">Selecione...</option>
+                                        <option>1 pessoa</option>
+                                        <option>2 pessoas</option>
+                                        <option>3 a 5 pessoas</option>
+                                        <option>6 a 10 pessoas</option>
+                                        <option>Mais de 10 pessoas</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Perfil do grupo -->
+                            <div class="mb-3">
+                                <label class="form-label">Perfil do grupo</label>
+                                <select class="form-select">
+                                    <option value="">Selecione...</option>
+                                    <option>Família com crianças</option>
+                                    <option>Casal</option>
+                                    <option>Grupo de amigos</option>
+                                    <option>Viagem solo</option>
+                                    <option>Grupo escolar / educacional</option>
+                                    <option>Grupo empresarial</option>
+                                </select>
+                            </div>
+
+                            <hr class="form-divider">
+
+                            <!-- Atrações de interesse -->
+                            <div class="mb-4">
+                                <label class="form-label d-block mb-3">Quais atrações você quer visitar?</label>
+                                <div class="check-grid">
+
+                                    <label class="check-item" onclick="this.classList.toggle('selected')">
+                                        <input type="checkbox" name="atracoes" value="letreiro">
+                                        <span class="check-label">
+                                            Letreiro Oficial
+                                            <small>Marco urbano · Centro</small>
+                                        </span>
+                                    </label>
+
+                                    <label class="check-item" onclick="this.classList.toggle('selected')">
+                                        <input type="checkbox" name="atracoes" value="salto">
+                                        <span class="check-label">
+                                            Salto do Ariranha
+                                            <small>Natureza · Trilha leve</small>
+                                        </span>
+                                    </label>
+
+                                    <label class="check-item" onclick="this.classList.toggle('selected')">
+                                        <input type="checkbox" name="atracoes" value="cristo">
+                                        <span class="check-label">
+                                            Cristo Redentor
+                                            <small>Mirante · Vista panorâmica</small>
+                                        </span>
+                                    </label>
+
+                                    <label class="check-item" onclick="this.classList.toggle('selected')">
+                                        <input type="checkbox" name="atracoes" value="por-do-sol">
+                                        <span class="check-label">
+                                            Pôr do Sol
+                                            <small>Contemplação · Mirante</small>
+                                        </span>
+                                    </label>
+
+                                </div>
+                            </div>
+
+                            <!-- Mensagem livre -->
+                            <div class="mb-4">
+                                <label class="form-label">Alguma dúvida ou pedido especial?</label>
+                                <textarea class="form-control" rows="4" placeholder="Hospedagem, acessibilidade, grupos especiais, eventos..."></textarea>
+                            </div>
+
+                            <!-- Botão enviar -->
+                            <button type="submit" class="btn-submit">Enviar planejamento</button>
+
+                        </form>
+
+                        <!-- Mensagem de sucesso (aparece após envio) -->
+                        <div class="success-msg" id="successMsg">
+                            <div class="check-circle">✓</div>
+                            <h4>Recebemos seu plano!</h4>
+                            <p>Nossa equipe de turismo vai entrar em contato em até 48 horas com tudo que você precisa para aproveitar Ariranha do Ivaí ao máximo.</p>
+                            <a href="roteiro.html" style="font-family:'Jost',sans-serif; font-size:0.8rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--blush-pink); text-decoration:none; border-bottom:1px solid rgba(212,130,110,0.4); padding-bottom:2px;">
+                                Ver roteiro completo →
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- SIDEBAR DIREITA -->
+                <div class="col-lg-5 fade-up">
+                    <div class="sidebar">
+
+                        <!-- Card: informações práticas -->
+                        <div class="info-card">
+                            <h5>Informações <em>práticas</em></h5>
+                            <ul class="info-list">
+                                <li>
+                                    <span class="i-label">Entrada</span>
+                                    <span class="i-val">Pontos turísticos gratuitos</span>
+                                </li>
+                                <li>
+                                    <span class="i-label">Horário</span>
+                                    <span class="i-val">Melhor entre 8h e 18h</span>
+                                </li>
+                                <li>
+                                    <span class="i-label">Acesso</span>
+                                    <span class="i-val">Carro próprio recomendado</span>
+                                </li>
+                                <li>
+                                    <span class="i-label">Distância</span>
+                                    <span class="i-val">~100 km de Apucarana</span>
+                                </li>
+                                <li>
+                                    <span class="i-label">Clima</span>
+                                    <span class="i-val">Subtropical · Melhor abr–set</span>
+                                </li>
+                                <li>
+                                    <span class="i-label">Contato</span>
+                                    <span class="i-val">Secretaria de Turismo local</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Card: dica do roteiro -->
+                        <div class="highlight-card">
+                            <span class="tag">Dica de ouro</span>
+                            <h5>Já temos um roteiro completo pronto para você</h5>
+                            <p>Montamos um guia de um dia inteiro com horários, distâncias e tudo que você precisa saber antes de chegar.</p>
+                            <a href="roteiro.html" class="btn-link-gold">Ver roteiro completo →</a>
+                        </div>
+
+                        <!-- Card: o que levar -->
+                        <div class="info-card">
+                            <h5>O que <em>levar</em></h5>
+                            <ul class="info-list">
+                                <li>
+                                    <span class="i-label">Trilha</span>
+                                    <span class="i-val">Calçado fechado e repelente</span>
+                                </li>
+                                <li>
+                                    <span class="i-label">Banho</span>
+                                    <span class="i-val">Roupa de banho e toalha</span>
+                                </li>
+                                <li>
+                                    <span class="i-label">Sol</span>
+                                    <span class="i-val">Protetor solar FPS 50+</span>
+                                </li>
+                                <li>
+                                    <span class="i-label">Tarde</span>
+                                    <span class="i-val">Agasalho para o pôr do sol</span>
+                                </li>
+                                <li>
+                                    <span class="i-label">Pagamento</span>
+                                    <span class="i-val">Dinheiro (nem sempre tem maquininha)</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- RODAPÉ -->
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <span class="footer-brand">Ariranha do Ivaí</span>
+                <span>&copy; 2024 Turismo Ariranha do Ivaí — Paraná, Brasil</span>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /* Animação de scroll */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        /* Envio do formulário: esconde form e exibe mensagem de sucesso */
+        document.getElementById('visitForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.style.display = 'none';
+            document.getElementById('successMsg').style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>
