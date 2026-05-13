@@ -6,68 +6,80 @@
     <title>Roteiro Completo — Ariranha do Ivaí</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
+        /* [1] Variáveis de cor — mesmas do index.html para consistência visual */
         :root {
-            --blush-pink: #d4826e;
-            --blush-dark: #b86a57;
-            --cream: #faf8f5;
-            --text-dark: #1a1714;
-            --text-muted: #6b6560;
-            --line: rgba(0,0,0,0.09);
-            --gold: #c9a96e;
+            --rosa:       #d4826e;
+            --rosa-escuro:#b86a57;
+            --creme:      #faf8f5;
+            --texto:      #1a1714;
+            --muted:      #6b6560;
+            --linha:      rgba(0,0,0,0.09);
+            --dourado:    #c9a96e;
         }
 
+        /* [2] Reset e base */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: 'Jost', sans-serif;
             background-color: #fff;
-            color: var(--text-dark);
+            color: var(--texto);
             font-weight: 400;
             -webkit-font-smoothing: antialiased;
         }
+        h1, h2, h3, h4, h5 { font-family: 'Playfair Display', serif; }
 
-        h1, h2, h3, h4, h5 {
-            font-family: 'Playfair Display', serif;
-        }
-
-        /* ── NAVBAR ─────────────────────────────── */
+        /* [3] Navbar — idêntica ao index.html */
         .navbar {
             background-color: rgba(255,255,255,0.97);
             backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--line);
-            padding: 1rem 0;
+            border-bottom: 1px solid var(--linha);
+            padding: 0.85rem 0;
         }
         .navbar-brand {
             font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            letter-spacing: 0.03em;
-            color: var(--text-dark) !important;
+            color: var(--texto) !important;
         }
-        .navbar-brand img { height: 36px; margin-right: 10px; }
+        .navbar-brand img { height: 34px; margin-right: 10px; }
         .nav-link {
-            font-family: 'Jost', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 500;
             letter-spacing: 0.14em;
             text-transform: uppercase;
-            color: var(--text-dark) !important;
-            margin-left: 2.2rem;
+            color: var(--texto) !important;
+            margin-left: 1.8rem;
             transition: color 0.3s;
+            position: relative;
+            padding: 0.4rem 0 !important;
         }
-        .nav-link:hover { color: var(--blush-pink) !important; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 1px;
+            background-color: var(--rosa);
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: var(--rosa) !important; }
 
-        /* ── HERO DA PÁGINA ─────────────────────── */
+        /* [4] Hero da página interna — fundo escuro com decoração geométrica */
         .page-hero {
-            background-color: var(--text-dark);
+            background-color: var(--texto);
             padding: 10rem 0 5rem;
             position: relative;
             overflow: hidden;
         }
-        /* Detalhe decorativo geométrico no fundo */
+        /*
+         * ::before e ::after são pseudo-elementos — elementos CSS criados
+         * sem tag HTML. O content:'' é obrigatório para aparecerem.
+         * Criamos dois círculos decorativos no canto direito do hero.
+         */
         .page-hero::before {
             content: '';
             position: absolute;
@@ -84,12 +96,13 @@
             border-radius: 50%;
             border: 1px solid rgba(201,169,110,0.1);
         }
-        .page-hero .eyebrow {
-            font-size: 0.73rem;
+
+        .eyebrow {
+            font-size: 0.72rem;
             font-weight: 600;
             letter-spacing: 0.28em;
             text-transform: uppercase;
-            color: var(--gold);
+            color: var(--dourado);
             display: block;
             margin-bottom: 1.2rem;
         }
@@ -100,64 +113,61 @@
             line-height: 1.1;
             margin-bottom: 1.5rem;
         }
-        .page-hero h1 em {
-            font-style: italic;
-            color: var(--gold);
-        }
+        .page-hero h1 em { font-style: italic; color: var(--dourado); }
         .page-hero p {
             color: rgba(255,255,255,0.6);
             font-size: 1rem;
-            font-weight: 400;
             line-height: 1.8;
             max-width: 480px;
         }
 
-        /* ── BARRA DE TEMPO/DIFICULDADE ─────────── */
+        /* [5] Barra de metadados (duração, dificuldade, perfil) */
         .trip-meta {
-            background-color: var(--cream);
-            border-top: 1px solid var(--line);
-            border-bottom: 1px solid var(--line);
+            background-color: var(--creme);
+            border-top: 1px solid var(--linha);
+            border-bottom: 1px solid var(--linha);
             padding: 1.8rem 0;
         }
         .meta-grid {
             display: flex;
             gap: 3rem;
             flex-wrap: wrap;
+            align-items: center;
         }
         .meta-item {
             display: flex;
             flex-direction: column;
             gap: 0.3rem;
         }
-        .meta-item .meta-label {
-            font-size: 0.68rem;
+        .meta-label {
+            font-size: 0.67rem;
             font-weight: 600;
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            color: var(--text-muted);
+            color: var(--muted);
         }
-        .meta-item .meta-value {
+        .meta-value {
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
             font-weight: 600;
-            color: var(--text-dark);
+            color: var(--texto);
         }
+        /* Separador vertical entre os metadados */
         .meta-sep {
             width: 1px;
-            background-color: var(--line);
-            align-self: stretch;
+            height: 40px;
+            background-color: var(--linha);
         }
 
-        /* ── LINHA DO TEMPO ─────────────────────── */
-        .timeline-section {
-            padding: 6rem 0;
-        }
+        /* [6] Seção da linha do tempo */
+        .timeline-section { padding: 6rem 0; }
+
         .section-eyebrow {
-            font-size: 0.73rem;
+            font-size: 0.72rem;
             font-weight: 600;
             letter-spacing: 0.26em;
             text-transform: uppercase;
-            color: var(--blush-pink);
+            color: var(--rosa);
             display: block;
             margin-bottom: 0.8rem;
         }
@@ -166,14 +176,16 @@
             font-weight: 600;
             line-height: 1.2;
             margin-bottom: 3.5rem;
-            color: var(--text-dark);
+            color: var(--texto);
         }
-        .section-title em {
-            font-style: italic;
-            color: var(--blush-pink);
-        }
+        .section-title em { font-style: italic; color: var(--rosa); }
 
-        /* Linha vertical conectando os itens */
+        /*
+         * [7] Linha do tempo (timeline)
+         * padding-left: 2.5rem → abre espaço para a linha vertical e o ponto.
+         * ::before → cria a linha vertical com position: absolute.
+         * left: 9px → alinha com o centro dos pontos circulares.
+         */
         .timeline {
             position: relative;
             padding-left: 2.5rem;
@@ -185,16 +197,17 @@
             top: 8px;
             bottom: 0;
             width: 1px;
-            background: linear-gradient(to bottom, var(--gold), transparent);
+            background-color: var(--linha);
         }
 
+        /* Cada passo da linha do tempo */
         .timeline-item {
             position: relative;
-            padding-bottom: 3.5rem;
+            padding-bottom: 3rem;
         }
         .timeline-item:last-child { padding-bottom: 0; }
 
-        /* Bolinha na linha do tempo */
+        /* Ponto circular na linha do tempo */
         .timeline-dot {
             position: absolute;
             left: -2.5rem;
@@ -203,40 +216,28 @@
             height: 18px;
             border-radius: 50%;
             background-color: #fff;
-            border: 2px solid var(--gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .timeline-dot::after {
-            content: '';
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background-color: var(--gold);
+            border: 2px solid var(--rosa);
         }
 
-        /* Horário acima do título do passo */
         .timeline-time {
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 600;
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 0.4rem;
+            color: var(--rosa);
             display: block;
+            margin-bottom: 0.6rem;
         }
         .timeline-item h4 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            margin-bottom: 0.8rem;
-            color: var(--text-dark);
+            margin-bottom: 0.7rem;
+            color: var(--texto);
         }
         .timeline-item p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
+            font-size: 0.93rem;
+            color: var(--muted);
             line-height: 1.8;
-            max-width: 540px;
             margin-bottom: 1rem;
         }
 
@@ -245,206 +246,181 @@
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 0.8rem;
         }
         .info-tag {
             font-size: 0.72rem;
             font-weight: 500;
-            letter-spacing: 0.08em;
-            color: var(--text-muted);
-            background-color: var(--cream);
-            border: 1px solid var(--line);
+            color: var(--muted);
+            background-color: var(--creme);
+            border: 1px solid var(--linha);
+            padding: 4px 10px;
             border-radius: 2px;
-            padding: 5px 12px;
         }
         .info-tag.highlight {
-            color: var(--blush-pink);
-            border-color: rgba(212,130,110,0.3);
-            background-color: rgba(212,130,110,0.06);
+            color: var(--rosa);
+            background-color: rgba(212,130,110,0.07);
+            border-color: rgba(212,130,110,0.25);
         }
 
-        /* ── DICAS PRÁTICAS ─────────────────────── */
+        /* [8] Seção de dicas práticas */
         .tips-section {
-            background-color: var(--cream);
+            background-color: var(--creme);
             padding: 6rem 0;
         }
         .tips-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5px;
-            margin-top: 3rem;
+            gap: 1.5rem;
+            margin-top: 1rem;
         }
         .tip-card {
             background-color: #fff;
-            padding: 2.2rem 2rem;
-            border: 1px solid var(--line);
+            border: 1px solid var(--linha);
+            padding: 2rem;
+            border-radius: 2px;
         }
         .tip-icon {
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
+            font-size: 1.8rem;
             display: block;
+            margin-bottom: 1rem;
         }
         .tip-card h5 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
-            margin-bottom: 0.7rem;
-            color: var(--text-dark);
+            margin-bottom: 0.6rem;
         }
         .tip-card p {
             font-size: 0.88rem;
-            color: var(--text-muted);
+            color: var(--muted);
             line-height: 1.75;
             margin: 0;
         }
 
-        /* ── CTA FINAL ──────────────────────────── */
+        /* [9] CTA final */
         .cta-section {
-            background-color: var(--text-dark);
-            padding: 6rem 0;
+            background-color: var(--texto);
+            padding: 7rem 0;
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            color: white;
         }
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            bottom: -100px; left: 50%;
-            transform: translateX(-50%);
-            width: 500px; height: 500px;
-            border-radius: 50%;
-            border: 1px solid rgba(201,169,110,0.1);
-        }
-        .cta-section .eyebrow {
-            font-size: 0.73rem;
-            font-weight: 600;
-            letter-spacing: 0.28em;
-            text-transform: uppercase;
-            color: var(--gold);
-            display: block;
-            margin-bottom: 1.2rem;
-        }
+        .cta-section .eyebrow { color: var(--dourado); }
         .cta-section h2 {
-            font-size: clamp(2.2rem, 4vw, 3.5rem);
-            font-weight: 600;
-            color: #fff;
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 700;
             margin-bottom: 1rem;
+            color: white;
         }
-        .cta-section h2 em {
-            font-style: italic;
-            color: var(--gold);
-        }
+        .cta-section h2 em { font-style: italic; color: var(--dourado); }
         .cta-section p {
             color: rgba(255,255,255,0.55);
             font-size: 1rem;
             margin-bottom: 2.5rem;
         }
 
-        /* Botões */
-        .btn-elegant {
+        /* Botão claro (sobre fundo escuro) */
+        .btn-claro {
             background-color: transparent;
             color: white;
-            border: 1.5px solid rgba(255,255,255,0.45);
+            border: 1.5px solid rgba(255,255,255,0.5);
             border-radius: 2px;
-            padding: 13px 34px;
+            padding: 12px 30px;
             font-family: 'Jost', sans-serif;
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             font-weight: 600;
             letter-spacing: 0.18em;
             text-transform: uppercase;
             text-decoration: none;
             display: inline-block;
-            transition: all 0.35s ease;
-            margin: 0.4rem;
+            margin: 0.5rem;
+            transition: all 0.35s;
         }
-        .btn-elegant:hover {
-            background-color: var(--blush-pink);
-            border-color: var(--blush-pink);
-            color: white;
-        }
-        .btn-elegant-gold {
-            background-color: var(--gold);
-            color: var(--text-dark);
-            border: 1.5px solid var(--gold);
-            border-radius: 2px;
-            padding: 13px 34px;
-            font-family: 'Jost', sans-serif;
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.35s ease;
-            margin: 0.4rem;
-        }
-        .btn-elegant-gold:hover {
-            background-color: var(--blush-dark);
-            border-color: var(--blush-dark);
+        .btn-claro:hover {
+            background-color: var(--rosa);
+            border-color: var(--rosa);
             color: white;
         }
 
-        /* ── RODAPÉ ─────────────────────────────── */
+        /* Botão dourado */
+        .btn-dourado {
+            background-color: var(--dourado);
+            color: var(--texto);
+            border: 1.5px solid var(--dourado);
+            border-radius: 2px;
+            padding: 12px 30px;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+            transition: all 0.35s;
+        }
+        .btn-dourado:hover {
+            background-color: #b8954a;
+            border-color: #b8954a;
+            color: white;
+        }
+
+        /* [10] Rodapé */
         footer {
-            background-color: var(--text-dark);
-            border-top: 1px solid rgba(255,255,255,0.07);
-            color: rgba(255,255,255,0.45);
+            background-color: var(--texto);
+            color: rgba(255,255,255,0.4);
             padding: 2.5rem 0;
+            border-top: 1px solid rgba(255,255,255,0.07);
         }
         .footer-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.78rem;
-            font-weight: 400;
+            font-size: 0.77rem;
             letter-spacing: 0.06em;
         }
         .footer-brand {
             font-family: 'Playfair Display', serif;
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 600;
-            color: rgba(255,255,255,0.75);
+            color: rgba(255,255,255,0.72);
         }
 
-        /* ── ANIMAÇÕES ──────────────────────────── */
+        /* [11] Animação de scroll */
         .fade-up {
             opacity: 0;
-            transform: translateY(26px);
+            transform: translateY(28px);
             transition: opacity 0.85s ease, transform 0.85s ease;
         }
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .fade-up:nth-child(2) { transition-delay: 0.1s; }
-        .fade-up:nth-child(3) { transition-delay: 0.2s; }
-        .fade-up:nth-child(4) { transition-delay: 0.3s; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-        /* ── RESPONSIVO ─────────────────────────── */
         @media (max-width: 768px) {
+            .footer-inner { flex-direction: column; gap: 0.8rem; text-align: center; }
             .meta-grid { gap: 1.5rem; }
             .meta-sep { display: none; }
-            .footer-inner { flex-direction: column; gap: 0.8rem; text-align: center; }
-            .tips-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
+    <!-- NAVBAR — mesma estrutura do index.html -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="index.html">
-                <img src="brasao.png" alt="Brasão Ariranha do Ivaí">
+                <img src="brasao.png" alt="Brasão de Ariranha do Ivaí">
                 Ariranha do Ivaí
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Abrir menu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html#home">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#destinos">Destinos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="roteiro.html" style="color: var(--gold) !important;">Roteiro</a></li>
+                    <li class="nav-item"><a class="nav-link" href="roteiro.html">Roteiro</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-sm btn-outline-danger px-3" href="https://www.google.com/maps/place/Ariranha+do+Iva%C3%AD,+PR" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; border-radius:2px;">
+                            <i class="bi bi-map"></i> Mapa
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -453,15 +429,15 @@
 
     <!-- HERO DA PÁGINA -->
     <section class="page-hero">
-        <div class="container">
-            <span class="eyebrow">Guia de viagem</span>
-            <h1>Roteiro <em>Completo</em><br>de um Dia</h1>
-            <p>Tudo que você precisa saber para aproveitar Ariranha do Ivaí do amanhecer ao pôr do sol — com dicas locais, horários e informações práticas.</p>
+        <div class="container position-relative">
+            <span class="eyebrow">Guia completo</span>
+            <h1>Roteiro de<br><em>Um Dia</em></h1>
+            <p>Do letreiro ao pôr do sol — tudo que você precisa para aproveitar Ariranha do Ivaí ao máximo.</p>
         </div>
     </section>
 
 
-    <!-- BARRA DE METADADOS DA VIAGEM -->
+    <!-- BARRA DE METADADOS DO ROTEIRO -->
     <div class="trip-meta">
         <div class="container">
             <div class="meta-grid">
@@ -473,11 +449,6 @@
                 <div class="meta-item">
                     <span class="meta-label">Distância</span>
                     <span class="meta-value">~8 km</span>
-                </div>
-                <div class="meta-sep"></div>
-                <div class="meta-item">
-                    <span class="meta-label">Melhor época</span>
-                    <span class="meta-value">Abr — Set</span>
                 </div>
                 <div class="meta-sep"></div>
                 <div class="meta-item">
@@ -505,26 +476,24 @@
 
                     <div class="timeline">
 
-                        <!-- Passo 1 -->
                         <div class="timeline-item fade-up">
                             <div class="timeline-dot"></div>
                             <span class="timeline-time">08h00 — Manhã</span>
                             <h4>Letreiro Oficial da Cidade</h4>
-                            <p>Comece o dia no marco urbano da cidade. A luz da manhã banha o letreiro de dourado — o horário perfeito para fotos em família sem multidões. Leve a câmera carregada e chegue cedo para aproveitar a tranquilidade.</p>
+                            <p>Comece o dia no marco urbano da cidade. A luz da manhã banha o letreiro de dourado — o horário perfeito para fotos em família sem multidões.</p>
                             <div class="info-tags">
-                                <span class="info-tag">📍 Centro da cidade</span>
+                                <span class="info-tag">📍 Centro</span>
                                 <span class="info-tag">⏱ 30 min</span>
                                 <span class="info-tag">🅿️ Estacionamento gratuito</span>
                                 <span class="info-tag highlight">Gratuito</span>
                             </div>
                         </div>
 
-                        <!-- Passo 2 -->
                         <div class="timeline-item fade-up">
                             <div class="timeline-dot"></div>
                             <span class="timeline-time">09h00 — Manhã</span>
-                            <h4>Café da manhã local</h4>
-                            <p>Aproveite um dos cafés e padarias do centro antes de seguir para a natureza. Experimente o pão de queijo artesanal e o suco de laranja da região — a energia vai fazer falta na trilha.</p>
+                            <h4>Café da Manhã Local</h4>
+                            <p>Aproveite um dos cafés do centro antes de partir para a natureza. Experimente o pão de queijo artesanal e o suco de laranja da região.</p>
                             <div class="info-tags">
                                 <span class="info-tag">🍞 Centro</span>
                                 <span class="info-tag">⏱ 45 min</span>
@@ -532,12 +501,11 @@
                             </div>
                         </div>
 
-                        <!-- Passo 3 -->
                         <div class="timeline-item fade-up">
                             <div class="timeline-dot"></div>
                             <span class="timeline-time">10h00 — Manhã</span>
                             <h4>Salto do Ariranha</h4>
-                            <p>A joia natural da cidade. A trilha até o salto é tranquila, cercada de mata fechada e canto de pássaros. As águas cristalinas convidam para um mergulho refrescante — perfeito após a caminhada. Leve roupa de banho, repelente e calçados fechados.</p>
+                            <p>A joia natural da cidade. A trilha é tranquila, cercada de mata fechada. As águas cristalinas convidam para um mergulho refrescante.</p>
                             <div class="info-tags">
                                 <span class="info-tag">📍 Zona rural</span>
                                 <span class="info-tag">⏱ 2–3 horas</span>
@@ -547,12 +515,11 @@
                             </div>
                         </div>
 
-                        <!-- Passo 4 -->
                         <div class="timeline-item fade-up">
                             <div class="timeline-dot"></div>
                             <span class="timeline-time">13h00 — Tarde</span>
                             <h4>Almoço — Culinária do Interior</h4>
-                            <p>Retorne ao centro e almoce com comida caseira paranaense. Feijão gordo, galinha caipira, arroz de carreteiro — o interior do Paraná tem uma tradição gastronômica rica que vale cada garfada.</p>
+                            <p>Retorne ao centro e almoce com comida caseira paranaense. Feijão gordo, galinha caipira, arroz de carreteiro.</p>
                             <div class="info-tags">
                                 <span class="info-tag">🍽️ Centro</span>
                                 <span class="info-tag">⏱ 1 hora</span>
@@ -560,26 +527,24 @@
                             </div>
                         </div>
 
-                        <!-- Passo 5 -->
                         <div class="timeline-item fade-up">
                             <div class="timeline-dot"></div>
                             <span class="timeline-time">15h00 — Tarde</span>
                             <h4>Cristo Redentor — O Mirante</h4>
-                            <p>Suba até o Cristo Redentor para ter uma vista panorâmica de toda a região. Dali de cima, você enxerga os vales, as lavouras e o horizonte se abrindo em 360°. Chegue com antecedência para garantir o melhor ângulo antes do pôr do sol.</p>
+                            <p>Vista panorâmica de toda a região. Dali de cima, você enxerga os vales, as lavouras e o horizonte se abrindo em 360°.</p>
                             <div class="info-tags">
-                                <span class="info-tag">📍 Ponto alto da cidade</span>
+                                <span class="info-tag">📍 Ponto alto</span>
                                 <span class="info-tag">⏱ 1–2 horas</span>
                                 <span class="info-tag">🌅 Vista panorâmica</span>
                                 <span class="info-tag highlight">Gratuito</span>
                             </div>
                         </div>
 
-                        <!-- Passo 6 -->
                         <div class="timeline-item fade-up">
                             <div class="timeline-dot"></div>
                             <span class="timeline-time">17h30 — Fim do dia</span>
                             <h4>Pôr do Sol no Mirante</h4>
-                            <p>O encerramento perfeito. Do alto do Cristo, o sol se despede pintando o céu de laranja, rosa e dourado sobre as colinas do interior paranaense. Um espetáculo gratuito, diário e inesquecível. Leve um agasalho — o vento fresco da tarde é constante.</p>
+                            <p>O encerramento perfeito. O sol se despede pintando o céu de laranja, rosa e dourado sobre as colinas do interior paranaense.</p>
                             <div class="info-tags">
                                 <span class="info-tag">🌇 Mirante Cristo</span>
                                 <span class="info-tag">⏱ 1 hora</span>
@@ -600,31 +565,30 @@
         <div class="container">
             <span class="section-eyebrow">Antes de ir</span>
             <h2 class="section-title">Dicas <em>Práticas</em></h2>
-
             <div class="tips-grid">
 
                 <div class="tip-card fade-up">
                     <span class="tip-icon">🚗</span>
                     <h5>Como chegar</h5>
-                    <p>Ariranha do Ivaí fica a cerca de 100 km de Apucarana e 80 km de Ivaiporã. Acesso pela PR-466 e estradas vicinais em bom estado. Recomendamos carro próprio para maior liberdade.</p>
+                    <p>Cerca de 100 km de Apucarana e 80 km de Ivaiporã. Acesso pela PR-466. Recomendamos carro próprio para maior liberdade.</p>
                 </div>
 
                 <div class="tip-card fade-up">
                     <span class="tip-icon">🌤️</span>
                     <h5>Clima ideal</h5>
-                    <p>Melhor entre abril e setembro, quando o tempo é mais seco e as trilhas estão em melhores condições. Evite dias de chuva para visitar o Salto — o acesso pode ser escorregadio.</p>
+                    <p>Melhor entre abril e setembro, quando o tempo é mais seco. Evite dias de chuva para visitar o Salto — o acesso pode ser escorregadio.</p>
                 </div>
 
                 <div class="tip-card fade-up">
                     <span class="tip-icon">🎒</span>
                     <h5>O que levar</h5>
-                    <p>Protetor solar, repelente, roupa de banho, calçado fechado para trilha, garrafinha de água, câmera fotográfica e dinheiro em espécie para os comércios locais.</p>
+                    <p>Protetor solar, repelente, roupa de banho, calçado fechado, garrafinha de água, câmera e dinheiro em espécie.</p>
                 </div>
 
                 <div class="tip-card fade-up">
                     <span class="tip-icon">📱</span>
                     <h5>Conectividade</h5>
-                    <p>A cobertura de celular no centro é boa. Na trilha do Salto o sinal pode ser fraco — baixe os mapas offline antes de sair. WhatsApp da Secretaria de Turismo para dúvidas locais.</p>
+                    <p>Cobertura boa no centro. Na trilha do Salto o sinal pode ser fraco — baixe os mapas offline antes de sair.</p>
                 </div>
 
             </div>
@@ -634,12 +598,20 @@
 
     <!-- CTA FINAL -->
     <section class="cta-section">
-        <div class="container position-relative">
+        <div class="container">
             <span class="eyebrow">Pronto para vir?</span>
             <h2>Ariranha do Ivaí<br><em>te espera</em></h2>
             <p>Uma cidade pequena com experiências que ficam para sempre.</p>
-            <a href="index.html" class="btn-elegant">← Voltar ao início</a>
-            <a href="https://maps.google.com/?q=Ariranha+do+Ivaí,+PR" target="_blank" class="btn-elegant-gold">Ver no mapa</a>
+            <div>
+                <a href="index.html" class="btn-claro">← Voltar ao início</a>
+                <!-- 
+                    Link externo para o Google Maps com a localização da cidade.
+                    target="_blank" → abre em nova aba.
+                -->
+                <a href="https://www.google.com/maps/place/Ariranha+do+Iva%C3%AD,+PR" target="_blank" rel="noopener noreferrer" class="btn-dourado">
+                    <i class="bi bi-map me-2"></i>Ver no mapa
+                </a>
+            </div>
         </div>
     </section>
 
@@ -657,6 +629,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        /* IntersectionObserver — mesmo padrão do index.html */
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
