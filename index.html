@@ -1,47 +1,30 @@
 <!DOCTYPE html>
-<!-- 
-    [1] DOCTYPE html: declara que este é um documento HTML5.
-    Obrigatório ser a primeira linha — informa ao navegador qual versão de HTML usar.
--->
 
-<!-- 
-    [2] <html lang="pt-br">: elemento raiz que envolve todo o conteúdo.
-    lang="pt-br" informa ao navegador (e leitores de tela) que o idioma é Português Brasileiro.
-    Isso é importante para acessibilidade e SEO.
--->
 <html lang="pt-br">
 
 <head>
     <!-- 
-        [3] <head>: seção de metadados — não aparece visualmente na página.
-        Contém configurações, título, links de CSS e fontes.
+        não aparece visualmente na página.
+        configurações, título, links de CSS e fontes.
     -->
 
-    <!-- 
-        [4] charset="UTF-8": define a codificação de caracteres.
-        UTF-8 suporta acentos, cedilha e caracteres especiais do português.
-        Sem isso, "ã", "é", "ç" poderiam aparecer quebrados.
-    -->
     <meta charset="UTF-8">
 
     <!-- 
-        [5] viewport: controla como a página é exibida em dispositivos móveis.
+      controla como a página é exibida em dispositivos móveis.
         width=device-width → largura = largura real da tela do aparelho.
         initial-scale=1.0 → sem zoom inicial.
         Sem isso, o site apareceria minúsculo em celulares.
     -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- 
-        [6] <title>: texto que aparece na aba do navegador e nos resultados de busca.
-    -->
+  
     <title>Visite Ariranha do Ivaí</title>
 
     <!-- 
-        [7] Bootstrap CSS via CDN (Content Delivery Network).
+        Bootstrap CSS via CDN (Content Delivery Network).
         CDN = servidor externo que entrega o arquivo — mais rápido que hospedar localmente.
-        Bootstrap 5.3 é o framework CSS que fornece Navbar, Cards, Carousel, Buttons e List Group —
-        todos os componentes obrigatórios deste projeto.
+        Bootstrap 5.3 é o framework CSS que fornece Navbar, Cards, Carousel, Buttons e List Grou
         rel="stylesheet" → diz ao navegador que é um arquivo de estilos.
         integrity + crossorigin → verificam que o arquivo não foi adulterado (segurança).
     -->
@@ -53,7 +36,7 @@
     >
 
     <!-- 
-        [8] Bootstrap Icons: biblioteca de ícones do próprio Bootstrap.
+         Bootstrap Icons: biblioteca de ícones do próprio Bootstrap.
         Permite usar <i class="bi bi-map"></i> etc.
         Adicionamos para enriquecer os botões e cards visualmente.
     -->
@@ -63,7 +46,6 @@
     >
 
     <!-- 
-        [9] Google Fonts: importa duas fontes externas.
         - Playfair Display: serifada clássica — usada em títulos (h1–h5).
         - Jost: sans-serif moderna e geométrica — usada no corpo do texto.
         O parâmetro display=swap garante que o texto apareça mesmo antes da fonte carregar.
@@ -75,7 +57,6 @@
 
     <style>
         /* =====================================================
-           [10] VARIÁVEIS CSS (:root)
            :root representa o elemento <html> — o topo da árvore.
            Variáveis declaradas aqui são acessíveis em qualquer
            seletor do documento com var(--nome-da-variavel).
@@ -92,7 +73,6 @@
         }
 
         /* =====================================================
-           [11] RESET UNIVERSAL (*)
            O seletor * aplica regras a TODOS os elementos.
            margin:0 + padding:0 → zeramos os espaços padrão do
            navegador, que variam entre Chrome, Firefox, Safari etc.
@@ -106,7 +86,6 @@
         }
 
         /* =====================================================
-           [12] ESTILO BASE DO CORPO
            font-family define a fonte padrão do site.
            A virgula em 'Jost', sans-serif é um fallback:
            se Jost não carregar, o navegador usa qualquer sans-serif.
@@ -126,12 +105,6 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* =====================================================
-           [13] NAVBAR — barra de navegação fixa no topo
-           position: fixed → fica no topo mesmo ao rolar a página.
-           backdrop-filter: blur → efeito "vidro" atrás da barra.
-           border-bottom → linha sutil separando da página.
-        ===================================================== */
         .navbar {
             background-color: rgba(255, 255, 255, 0.97);
             backdrop-filter: blur(14px);
@@ -151,7 +124,7 @@
             height: 34px;
             margin-right: 10px;
         }
-
+ /*! important! ->"Não me interessa o que as outras regras dizem, aplica este estilo e ponto final!"*/
         .nav-link {
             font-size: 0.78rem;
             font-weight: 500;
@@ -180,7 +153,7 @@
         .nav-link:hover { color: var(--rosa) !important; }
 
         /* =====================================================
-           [14] CARROSSEL HERO — ocupa 100% da altura da tela
+           CARROSSEL HERO — ocupa 100% da altura da tela
            100vh = 100% da altura visível da janela (viewport height).
            object-fit: cover → a imagem preenche sem distorcer.
            filter: brightness(0.5) → escurece para o texto se destacar.
@@ -200,14 +173,20 @@
         /* Texto centralizado verticalmente sobre a foto */
         .carousel-caption {
             bottom: auto;
+            /*por padrão, o Bootstrap "gruda" a caixa de texto na parte de baixo (bottom, o bottom auto faz com q ele esqueca dessa regra)*/
             top: 50%;
+            /*caixa de texto desce até a metade da tela. Isso empurra o topo da caixa exatamente para o meio (50%) da altura do carrossel.*/
             transform: translateY(-50%);
+            /* o top:50% faz com q o topo do texto fique no meio, então o texto ica um pouco mais pra baixo, o transform mas com q ele suba metade do seu tamanho, assim fica bem no meio*/
             text-align: left;
+            /*O padrão do Bootstrap é texto centralizado, mas essa linha alinha todo o texto para a esquerda.*/
             left: 8%;
+            /*8% para a direita.*/
             right: auto;
+            /* fala pro bootstrap parar de esticar pra esuqerda e direita e deixa o texto com a largura natural dele, sem esticar. */
             max-width: 600px;
+            /* Evita que o texto fique muito largo em telas grandes, mantendo a legibilidade. */
         }
-
         .carousel-caption .label {
             font-size: 0.72rem;
             font-weight: 600;
@@ -252,8 +231,7 @@
         .carousel-indicators .active { background-color: var(--dourado); }
 
         /* =====================================================
-           [15] BOTÕES PERSONALIZADOS
-           Criamos dois estilos: claro (sobre fotos escuras) e escuro.
+          dois estilos: claro (sobre fotos escuras) e escuro.
            transition: all 0.35s → suaviza TODAS as mudanças de estilo.
         ===================================================== */
         .btn-claro {
@@ -299,7 +277,6 @@
         }
 
         /* =====================================================
-           [16] SEÇÃO INTRODUTÓRIA
            text-align: center → centraliza todo o conteúdo filho.
            O divider é uma linha decorativa criada em CSS puro.
         ===================================================== */
@@ -338,10 +315,9 @@
         }
 
         /* =====================================================
-           [17] CARDS DE PONTOS TURÍSTICOS (Bootstrap Cards)
-           Usamos as classes nativas do Bootstrap: .card, .card-img-top,
+           classes nativas do Bootstrap: .card, .card-img-top,
            .card-body, .card-title, .card-text.
-           Adicionamos hover com transform: translateY para "levantar" o card.
+           hover com transform: translateY para "levantar" o card.
            overflow: hidden → garante que a imagem não vaze do card ao escalar.
         ===================================================== */
         .card {
@@ -391,7 +367,7 @@
         }
 
         /* =====================================================
-           [18] SEÇÃO "COMO APROVEITAR"
+            "COMO APROVEITAR"
         ===================================================== */
         .info-section {
             background-color: var(--creme);
@@ -424,9 +400,8 @@
         }
 
         /* =====================================================
-           [19] LIST GROUP DE PASSOS DO ROTEIRO
-           Usamos o componente .list-group do Bootstrap com
-           customizações para o visual do projeto.
+           LIST GROUP DE PASSOS DO ROTEIRO
+            componente .list-group do Bootstrap com customizações para o visual do projeto
            list-style: none → remove as bolinhas padrão de <ul>.
         ===================================================== */
         .steps-list {
@@ -472,9 +447,9 @@
         }
 
         /* =====================================================
-           [20] LIST GROUP BOOTSTRAP — componente de lista
+           LIST GROUP BOOTSTRAP — componente de lista
            Usado na seção "O que levar" na sidebar.
-           Estilizamos os itens .list-group-item para combinar
+           Estiliza  itens .list-group-item para combinar
            com a identidade visual do site.
         ===================================================== */
         .list-group-item {
@@ -494,7 +469,7 @@
         }
 
         /* =====================================================
-           [21] RODAPÉ
+           RODAPÉ
            display: flex + justify-content: space-between →
            posiciona o nome à esquerda e o copyright à direita.
         ===================================================== */
@@ -521,7 +496,7 @@
         }
 
         /* =====================================================
-           [23] ANIMAÇÃO FADE-UP (Intersection Observer)
+           ANIMAÇÃO FADE-UP (Intersection Observer)
            opacity: 0 → elemento começa invisível.
            transform: translateY(28px) → começa 28px abaixo.
            transition → define quanto tempo a animação demora.
@@ -544,7 +519,7 @@
         .fade-up:nth-child(4) { transition-delay: 0.36s; }
 
         /* =====================================================
-           [24] RESPONSIVIDADE — Media Queries
+           RESPONSIVIDADE — Media Queries
            @media (max-width: 768px) aplica estilos APENAS quando
            a tela tiver 768px ou menos (tablets e celulares).
         ===================================================== */
@@ -562,7 +537,7 @@
 <body>
 
     <!-- ==================================================
-         [25] NAVBAR — COMPONENTE BOOTSTRAP
+         NAVBAR — COMPONENTE BOOTSTRAP
          
          Estrutura Bootstrap:
          <nav class="navbar navbar-expand-lg fixed-top">
@@ -640,7 +615,8 @@
 
 
     <!-- ==================================================
-         [26] HERO — CARROSSEL BOOTSTRAP
+         
+    HERO — CARROSSEL BOOTSTRAP
          
          Estrutura do Carousel Bootstrap 5:
          
@@ -729,7 +705,7 @@
 
 
     <!-- ==================================================
-         [27] INTRODUÇÃO DA SEÇÃO DE DESTINOS
+         INTRODUÇÃO DA SEÇÃO DE DESTINOS
     ================================================== -->
     <div class="intro-strip container">
         <span class="eyebrow">O que visitar</span>
@@ -739,7 +715,7 @@
 
 
     <!-- ==================================================
-         [28] CARDS DE PONTOS TURÍSTICOS — COMPONENTE BOOTSTRAP
+         CARDS DE PONTOS TURÍSTICOS — COMPONENTE BOOTSTRAP
          
          Estrutura do Card Bootstrap:
          <div class="card">
@@ -751,7 +727,7 @@
            <div class="card-footer"> → rodapé do card (opcional)
          </div>
          
-         Usamos o sistema de grid do Bootstrap:
+          sistema de grid do Bootstrap:
          row → linha do grid (usa flexbox internamente)
          col-md-6 col-lg-3 → cada card ocupa:
            - 12 colunas (100%) em telas pequenas
@@ -830,7 +806,7 @@
 
 
     <!-- ==================================================
-         [29] SEÇÃO "COMO APROVEITAR" — COM LIST GROUP
+         SEÇÃO "COMO APROVEITAR" — COM LIST GROUP
          
          O List Group do Bootstrap é um componente de lista
          visualmente organizada. Classes:
@@ -838,8 +814,7 @@
          .list-group → contêiner da lista
          .list-group-item → cada item da lista
          
-         Usamos aqui para listar o que levar na viagem,
-         seguindo os itens obrigatórios do projeto.
+        listar o que levar na viagem,
     ================================================== -->
     <section class="info-section" id="roteiro">
         <div class="container">
@@ -966,7 +941,7 @@
 
     <script>
         /*
-         * [33] INTERSECTION OBSERVER — animação de scroll
+         * INTERSECTION OBSERVER — animação de scroll
          *
          * IntersectionObserver é uma API nativa do navegador que
          * monitora quando elementos entram ou saem da área visível.
