@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        /* [1] Variáveis de cor — mesmas do index.html para consistência visual */
+        /* Variáveis de cor — mesmas do index.html para consistência visual */
         :root {
             --rosa:       #d4826e;
             --rosa-escuro:#b86a57;
@@ -21,7 +21,7 @@
             --dourado:    #c9a96e;
         }
 
-        /* [2] Reset e base */
+        /* Reset e base */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Jost', sans-serif;
@@ -32,7 +32,7 @@
         }
         h1, h2, h3, h4, h5 { font-family: 'Playfair Display', serif; }
 
-        /* [3] Navbar — idêntica ao index.html */
+        /* Navbar — idêntica ao index.html */
         .navbar {
             background-color: rgba(255,255,255,0.97);
             backdrop-filter: blur(14px);
@@ -68,7 +68,7 @@
         .nav-link:hover::after { width: 100%; }
         .nav-link:hover { color: var(--rosa) !important; }
 
-        /* [4] Hero da página interna — fundo escuro com decoração geométrica */
+        /* fundo escuro com decoração geométrica */
         .page-hero {
             background-color: var(--texto);
             padding: 10rem 0 5rem;
@@ -78,7 +78,7 @@
         /*
          * ::before e ::after são pseudo-elementos — elementos CSS criados
          * sem tag HTML. O content:'' é obrigatório para aparecerem.
-         * Criamos dois círculos decorativos no canto direito do hero.
+         * dois círculos decorativos no canto direito do hero.
          */
         .page-hero::before {
             content: '';
@@ -121,7 +121,7 @@
             max-width: 480px;
         }
 
-        /* [5] Barra de metadados (duração, dificuldade, perfil) */
+        /* Barra de metadados (duração, dificuldade, perfil) */
         .trip-meta {
             background-color: var(--creme);
             border-top: 1px solid var(--linha);
@@ -159,7 +159,7 @@
             background-color: var(--linha);
         }
 
-        /* [6] Seção da linha do tempo */
+        /* Seção da linha do tempo */
         .timeline-section { padding: 6rem 0; }
 
         .section-eyebrow {
@@ -181,7 +181,7 @@
         .section-title em { font-style: italic; color: var(--rosa); }
 
         /*
-         * [7] Linha do tempo (timeline)
+         * Linha do tempo (timeline)
          * padding-left: 2.5rem → abre espaço para a linha vertical e o ponto.
          * ::before → cria a linha vertical com position: absolute.
          * left: 9px → alinha com o centro dos pontos circulares.
@@ -262,7 +262,7 @@
             border-color: rgba(212,130,110,0.25);
         }
 
-        /* [8] Seção de dicas práticas */
+        /* Seção de dicas práticas */
         .tips-section {
             background-color: var(--creme);
             padding: 6rem 0;
@@ -296,7 +296,8 @@
             margin: 0;
         }
 
-        /* [9] CTA final */
+        /* CTA final */
+        /* cta é a sigla de "call to action" — um convite para o usuário realizar uma ação, como visitar o mapa ou voltar ao início. */
         .cta-section {
             background-color: var(--texto);
             padding: 7rem 0;
@@ -363,7 +364,7 @@
             color: white;
         }
 
-        /* [10] Rodapé */
+        /* Rodapé */
         footer {
             background-color: var(--texto);
             color: rgba(255,255,255,0.4);
@@ -384,7 +385,7 @@
             color: rgba(255,255,255,0.72);
         }
 
-        /* [11] Animação de scroll */
+        /* Animação de scroll */
         .fade-up {
             opacity: 0;
             transform: translateY(28px);
